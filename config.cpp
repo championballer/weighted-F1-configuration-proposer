@@ -1,4 +1,6 @@
 #include<bits/stdc++.h>
+#include<fstream>
+#include<sstream>
 
 using namespace std;
 
@@ -24,6 +26,14 @@ node knapsack(int W, int S, int index, vector<int> & weight, vector<int> & value
 	if(S<=0)
 	{
 		node ans;
+		return ans;
+	}
+
+	if(dp[W][S][index]!=-1)
+	{
+		node ans;
+		ans.value = dp[W][S][index];
+		ans.items = items[W][S][index];
 		return ans;
 	}
 	
@@ -62,18 +72,7 @@ int main()
 	//TODO: Optimise for space in case of item printing
 	//TODO: Maximising parameters, initially for complete value, and then individual features of the car
 
-	int n;
-	cout<<"Please input the number of items:";
-	cin>>n;
 
-	vector<int> weight(n,0);
-	vector<int> value(n,0);
-
-	cout<<"Please enter the weights of the items:";
-	for(int i=0;i<n;i++)cin>>weight[i];
-	cout<<"Please enter the corresponding values of the items:";
-	for(int i=0;i<n;i++)cin>>value[i];
-	
 	int W;
 	cout<<"Please enter the capacity of the sack:";
 	cin>>W;
@@ -82,12 +81,47 @@ int main()
 	cout<<"Please enter the no. of slots available:";
 	cin>>S;
 
+	vector<int> weight;
+	vector<int> value;
+	vector<string> names;
+	ifstream myfile;
+	myfile.open("./parts.txt");
+
+	if(!myfile)
+	{
+		return -1;
+	}
+
+	else
+	{
+		string line;
+		while(getline(myfile, line))
+		{
+			string name_of_part;
+			int total_value;
+			int aero;
+			int brakes;
+			int power;
+			int handling;
+			int lightweight;
+			int weight_of_part;
+			istringstream mystream(line);
+			while(mystream>>name_of_part>>total_value>>aero>>brakes>>power>>handling>>lightweight>>weight_of_part)
+			{
+				cout<<name_of_part<<" "<<total_value<<" "<<aero<<" "<<brakes<<" "<<power<<" "<<handling<<" "<<lightweight<<" "<<weight_of_part<<endl;
+				names.push_back(name_of_part);
+				value.push_back(total_value);
+				weight.push_back(weight_of_part);
+			}
+		}
+	}
+
 	vector<vector<vector<int> > > dp(W+1, vector<vector<int> > (S+1,vector<int> (value.size()+1,-1)));
 	vector<vector<vector<vector<int> > > > items(W+1, vector<vector<vector<int> > > (S+1, vector<vector<int> > (value.size()+1,{})));
 	node ans = knapsack(W, S, 0, weight, value, dp,items);
 	cout<<ans.value<<endl;
 
-	for(int i=0;i<ans.items.size();i++)cout<<ans.items[i]<<" ";
+	for(int i=0;i<ans.items.size();i++)cout<<names[ans.items[i]]<<" ";
 	cout<<endl;
 	// for(int i=0;i<dp.size();i++)
 	// {
