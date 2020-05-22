@@ -51,7 +51,11 @@ node knapsack(int W, int index, vector<int> & weight, vector<int> & value, vecto
 
 int main()
 {
-	//TODO:Adapt to work with the game
+	//TODO: Adapt to work with the game
+	//TODO: Optimise by removing memoization in favour of dp
+	//TODO: Optimise for space in case of item printing
+	//TODO: Maximising parameters, initially for complete value, and then individual features of the car
+	//TODO: Include slot constraint
 
 	int n;
 	cout<<"Please input the number of items:";
