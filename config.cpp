@@ -2,6 +2,12 @@
 #include<fstream>
 #include<sstream>
 
+#define A 1
+#define B 1
+#define P 1
+#define H 1
+#define L 1
+
 using namespace std;
 
 struct node{
@@ -9,7 +15,12 @@ struct node{
 	vector<int> items;
 };
 
-node knapsack(int W, int S, int index, vector<int> & weight, vector<int> & value, vector<vector<vector<int> > > & dp, vector<vector<vector<vector<int> > > > & items)
+int calculate_value(int index,vector<int>& aero, vector<int> & brakes, vector<int> & power, vector<int> & handling, vector<int> & lightweight, int a = A, int b = B, int p = P, int h = H, int l = L)
+{
+	return a*aero[index]+b*brakes[index]+p*power[index]+h*handling[index]+l*lightweight[index];
+}
+
+node knapsack(int W, int S, int index, vector<int> & weight, vector<int> & value, vector<int> & aero, vector<int> & brakes, vector<int> & power, vector<int> & handling, vector<int> & lightweight, vector<vector<vector<int> > > & dp, vector<vector<vector<vector<int> > > > & items)
 {
 	if(index == weight.size())
 	{
@@ -39,11 +50,11 @@ node knapsack(int W, int S, int index, vector<int> & weight, vector<int> & value
 	
 	int val1 = 0;
 	int val2 = 0;
-	node ans1 = knapsack(W-weight[index],S-1,index+1, weight, value, dp, items);
-	node ans2 = knapsack(W, S, index+1, weight, value, dp, items);
+	node ans1 = knapsack(W-weight[index],S-1,index+1, weight, value, aero, brakes, power, handling, lightweight, dp, items);
+	node ans2 = knapsack(W, S, index+1, weight, value,aero, brakes, power, handling, lightweight, dp, items);
 	if(W-weight[index]>=0 && S-1>=0)
 	{
-			val1 = value[index] + ans1.value;
+			val1 = calculate_value(index,aero,brakes,power,handling, lightweight) + ans1.value;
 	}
 	val2 = ans2.value;
 
@@ -83,6 +94,11 @@ int main()
 
 	vector<int> weight;
 	vector<int> value;
+	vector<int> aero;
+	vector<int> brakes;
+	vector<int> power;
+	vector<int> handling;
+	vector<int> lightweight;
 	vector<string> names;
 	ifstream myfile;
 	myfile.open("./parts.txt");
@@ -99,26 +115,31 @@ int main()
 		{
 			string name_of_part;
 			int total_value;
-			int aero;
-			int brakes;
-			int power;
-			int handling;
-			int lightweight;
+			int aero_;
+			int brakes_;
+			int power_;
+			int handling_;
+			int lightweight_;
 			int weight_of_part;
 			istringstream mystream(line);
-			while(mystream>>name_of_part>>total_value>>aero>>brakes>>power>>handling>>lightweight>>weight_of_part)
+			while(mystream>>name_of_part>>total_value>>aero_>>brakes_>>power_>>handling_>>lightweight_>>weight_of_part)
 			{
-				cout<<name_of_part<<" "<<total_value<<" "<<aero<<" "<<brakes<<" "<<power<<" "<<handling<<" "<<lightweight<<" "<<weight_of_part<<endl;
+				cout<<name_of_part<<" "<<total_value<<" "<<aero_<<" "<<brakes_<<" "<<power_<<" "<<handling_<<" "<<lightweight_<<" "<<weight_of_part<<endl;
 				names.push_back(name_of_part);
 				value.push_back(total_value);
 				weight.push_back(weight_of_part);
+				aero.push_back(aero_);
+				brakes.push_back(brakes_);
+				power.push_back(power_);
+				handling.push_back(handling_);
+				lightweight.push_back(lightweight_);
 			}
 		}
 	}
 
 	vector<vector<vector<int> > > dp(W+1, vector<vector<int> > (S+1,vector<int> (value.size()+1,-1)));
 	vector<vector<vector<vector<int> > > > items(W+1, vector<vector<vector<int> > > (S+1, vector<vector<int> > (value.size()+1,{})));
-	node ans = knapsack(W, S, 0, weight, value, dp,items);
+	node ans = knapsack(W, S, 0, weight, value,aero, brakes, power, handling, lightweight, dp,items);
 	cout<<ans.value<<endl;
 
 	for(int i=0;i<ans.items.size();i++)cout<<names[ans.items[i]]<<" ";
