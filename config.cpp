@@ -2,24 +2,55 @@
 
 using namespace std;
 
-int knapsack(int W, int index, vector<int> & weight, vector<int> & value, vector<vector<int> > & dp)
+struct node{
+	int value{0};
+	vector<int> items;
+};
+
+node knapsack(int W, int index, vector<int> & weight, vector<int> & value, vector<vector<int> > & dp, vector<vector<vector<int> > > & items)
 {
-	if(index == weight.size())return 0;
-	if(W<=0)return 0;
+	if(index == weight.size())
+	{
+		node ans;
+		return ans;
+	}
+		
+	if(W<=0)
+	{
+		node ans;
+		return ans;
+	}
 	
 	int val1 = 0;
 	int val2 = 0;
-	if(W-weight[index]>=0)val1 = value[index] + knapsack(W-weight[index], index+1, weight, value, dp);
-	
-	val2 = knapsack(W, index+1, weight, value, dp);
+	node ans1 = knapsack(W-weight[index], index+1, weight, value, dp, items);
+	node ans2 = knapsack(W, index+1, weight, value, dp, items);
+	if(W-weight[index]>=0)
+	{
+			val1 = value[index] + ans1.value;
+	}
+	val2 = ans2.value;
 
 	dp[W][index] = max(val1, val2);
-	return dp[W][index];
+	if(val1>val2)
+	{
+		items[W][index].push_back(index);
+		for(int i=0;i<ans1.items.size();i++)items[W][index].push_back(ans1.items[i]);
+		
+	}
+
+	else
+	{
+		for(int i=0;i<ans2.items.size();i++)items[W][index].push_back(ans2.items[i]);
+	}
+	node ans;
+	ans.value = dp[W][index];
+	ans.items = items[W][index];
+	return ans;
 }
 
 int main()
 {
-	//TODO:Print the involved items in the sack
 	//TODO:Adapt to work with the game
 
 	int n;
@@ -39,9 +70,12 @@ int main()
 	cin>>W;
 
 	vector<vector<int> > dp(W+1, vector<int> (value.size()+1,-1));
+	vector<vector<vector<int> > > items(W+1, vector<vector<int> > (value.size()+1,{}));
+	node ans = knapsack(W, 0, weight, value, dp,items);
+	cout<<ans.value<<endl;
 
-	cout<<knapsack(W, 0, weight, value, dp)<<endl;
-
+	for(int i=0;i<ans.items.size();i++)cout<<ans.items[i]<<" ";
+	cout<<endl;
 	// for(int i=0;i<dp.size();i++)
 	// {
 	// 	for(int j=0;j<dp[0].size();j++)cout<<dp[i][j]<<" ";
