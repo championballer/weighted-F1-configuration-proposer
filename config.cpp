@@ -7,7 +7,7 @@ struct node{
 	vector<int> items;
 };
 
-node knapsack(int W, int index, vector<int> & weight, vector<int> & value, vector<vector<int> > & dp, vector<vector<vector<int> > > & items)
+node knapsack(int W, int S, int index, vector<int> & weight, vector<int> & value, vector<vector<vector<int> > > & dp, vector<vector<vector<vector<int> > > > & items)
 {
 	if(index == weight.size())
 	{
@@ -20,32 +20,38 @@ node knapsack(int W, int index, vector<int> & weight, vector<int> & value, vecto
 		node ans;
 		return ans;
 	}
+
+	if(S<=0)
+	{
+		node ans;
+		return ans;
+	}
 	
 	int val1 = 0;
 	int val2 = 0;
-	node ans1 = knapsack(W-weight[index], index+1, weight, value, dp, items);
-	node ans2 = knapsack(W, index+1, weight, value, dp, items);
-	if(W-weight[index]>=0)
+	node ans1 = knapsack(W-weight[index],S-1,index+1, weight, value, dp, items);
+	node ans2 = knapsack(W, S, index+1, weight, value, dp, items);
+	if(W-weight[index]>=0 && S-1>=0)
 	{
 			val1 = value[index] + ans1.value;
 	}
 	val2 = ans2.value;
 
-	dp[W][index] = max(val1, val2);
+	dp[W][S][index] = max(val1, val2);
 	if(val1>val2)
 	{
-		items[W][index].push_back(index);
-		for(int i=0;i<ans1.items.size();i++)items[W][index].push_back(ans1.items[i]);
+		items[W][S][index].push_back(index);
+		for(int i=0;i<ans1.items.size();i++)items[W][S][index].push_back(ans1.items[i]);
 		
 	}
 
 	else
 	{
-		for(int i=0;i<ans2.items.size();i++)items[W][index].push_back(ans2.items[i]);
+		for(int i=0;i<ans2.items.size();i++)items[W][S][index].push_back(ans2.items[i]);
 	}
 	node ans;
-	ans.value = dp[W][index];
-	ans.items = items[W][index];
+	ans.value = dp[W][S][index];
+	ans.items = items[W][S][index];
 	return ans;
 }
 
@@ -55,7 +61,6 @@ int main()
 	//TODO: Optimise by removing memoization in favour of dp
 	//TODO: Optimise for space in case of item printing
 	//TODO: Maximising parameters, initially for complete value, and then individual features of the car
-	//TODO: Include slot constraint
 
 	int n;
 	cout<<"Please input the number of items:";
@@ -73,16 +78,24 @@ int main()
 	cout<<"Please enter the capacity of the sack:";
 	cin>>W;
 
-	vector<vector<int> > dp(W+1, vector<int> (value.size()+1,-1));
-	vector<vector<vector<int> > > items(W+1, vector<vector<int> > (value.size()+1,{}));
-	node ans = knapsack(W, 0, weight, value, dp,items);
+	int S;
+	cout<<"Please enter the no. of slots available:";
+	cin>>S;
+
+	vector<vector<vector<int> > > dp(W+1, vector<vector<int> > (S+1,vector<int> (value.size()+1,-1)));
+	vector<vector<vector<vector<int> > > > items(W+1, vector<vector<vector<int> > > (S+1, vector<vector<int> > (value.size()+1,{})));
+	node ans = knapsack(W, S, 0, weight, value, dp,items);
 	cout<<ans.value<<endl;
 
 	for(int i=0;i<ans.items.size();i++)cout<<ans.items[i]<<" ";
 	cout<<endl;
 	// for(int i=0;i<dp.size();i++)
 	// {
-	// 	for(int j=0;j<dp[0].size();j++)cout<<dp[i][j]<<" ";
+	// 	for(int j=0;j<dp[0].size();j++)
+	// 	{
+	// 		for(int k=0;k<dp[0][0].size();k++)cout<<dp[i][j][k]<<" ";
+	// 			cout<<endl;
+	// 	}
 	// 	cout<<endl;
 	// }
 }
