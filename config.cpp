@@ -2,11 +2,13 @@
 #include<fstream>
 #include<sstream>
 
-#define A 1
-#define B 1
-#define P 1
-#define H 1
-#define L 1
+#define A 30
+#define B 9
+#define P 33
+#define H 9
+#define L 9
+#define W_ 34
+#define S_ 10
 
 using namespace std;
 
@@ -84,14 +86,8 @@ int main()
 	//TODO: Maximising parameters, initially for complete value, and then individual features of the car
 
 
-	int W;
-	cout<<"Please enter the capacity of the sack:";
-	cin>>W;
-
-	int S;
-	cout<<"Please enter the no. of slots available:";
-	cin>>S;
-
+	int W = W_; 
+	int S = S_;
 	vector<int> weight;
 	vector<int> value;
 	vector<int> aero;
@@ -124,7 +120,7 @@ int main()
 			istringstream mystream(line);
 			while(mystream>>name_of_part>>total_value>>aero_>>brakes_>>power_>>handling_>>lightweight_>>weight_of_part)
 			{
-				cout<<name_of_part<<" "<<total_value<<" "<<aero_<<" "<<brakes_<<" "<<power_<<" "<<handling_<<" "<<lightweight_<<" "<<weight_of_part<<endl;
+				//cout<<name_of_part<<" "<<total_value<<" "<<aero_<<" "<<brakes_<<" "<<power_<<" "<<handling_<<" "<<lightweight_<<" "<<weight_of_part<<endl;
 				names.push_back(name_of_part);
 				value.push_back(total_value);
 				weight.push_back(weight_of_part);
@@ -140,10 +136,15 @@ int main()
 	vector<vector<vector<int> > > dp(W+1, vector<vector<int> > (S+1,vector<int> (value.size()+1,-1)));
 	vector<vector<vector<vector<int> > > > items(W+1, vector<vector<vector<int> > > (S+1, vector<vector<int> > (value.size()+1,{})));
 	node ans = knapsack(W, S, 0, weight, value,aero, brakes, power, handling, lightweight, dp,items);
-	cout<<ans.value<<endl;
+	int final_value = 0;
 
-	for(int i=0;i<ans.items.size();i++)cout<<names[ans.items[i]]<<" ";
+	for(int i=0;i<ans.items.size();i++)
+	{
+		cout<<names[ans.items[i]]<<" ";
+		final_value+=value[ans.items[i]];
+	}
 	cout<<endl;
+	cout<<final_value<<endl;
 	// for(int i=0;i<dp.size();i++)
 	// {
 	// 	for(int j=0;j<dp[0].size();j++)
