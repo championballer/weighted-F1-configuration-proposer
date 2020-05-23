@@ -2,10 +2,10 @@
 #include<fstream>
 #include<sstream>
 
-#define A 30
+#define A 33
 #define B 12
 #define P 33
-#define H 18
+#define H 12
 #define L 21
 #define W_ 34
 #define S_ 10
