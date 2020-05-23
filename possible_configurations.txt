@@ -1,0 +1,9 @@
+W:34 S:10 A:33 B:12 P:33 H:12 L:21
+Total:1015
+Aero:323
+Brakes:61
+Power:222
+Handling:223
+Lightweight:183
+Parts to include : BODYWORK EXHAUST FLYWHEEL ADVANCED_BALLASTS DIFFUSERS REAR_SUSPENSIONS PISTONS COCKPIT FUEL_PUMP REAR_WING 
+------------------------------------------------------------------------

@@ -9,7 +9,8 @@
 #define L 21
 #define W_ 34
 #define S_ 10
-
+#define INPUT_FILE "./parts.txt"
+#define OUTPUT_FILE "./possible_configurations.txt"
 using namespace std;
 
 struct node{
@@ -95,11 +96,9 @@ node knapsack(int W, int S, int index, vector<int> & weight, vector<int> & value
 
 int main()
 {
-	//TODO: Adapt to work with the game
 	//TODO: Optimise by removing memoization in favour of dp
 	//TODO: Optimise for space in case of item printing
-	//TODO: Maximising parameters, initially for complete value, and then individual features of the car
-
+	//TODO: Work on the balancing factor and the weighting mechanism
 
 	int W = W_; 
 	int S = S_;
@@ -111,18 +110,21 @@ int main()
 	vector<int> handling;
 	vector<int> lightweight;
 	vector<string> names;
-	ifstream myfile;
-	myfile.open("./parts.txt");
+	
 
-	if(!myfile)
+	ifstream inputfile;
+	inputfile.open(INPUT_FILE);
+
+	if(!inputfile)
 	{
+		cout<<"Input file not available, please check for availability"<<endl;
 		return -1;
 	}
 
 	else
 	{
 		string line;
-		while(getline(myfile, line))
+		while(getline(inputfile, line))
 		{
 			string name_of_part;
 			int total_value;
@@ -135,7 +137,6 @@ int main()
 			istringstream mystream(line);
 			while(mystream>>name_of_part>>total_value>>aero_>>brakes_>>power_>>handling_>>lightweight_>>weight_of_part)
 			{
-				//cout<<name_of_part<<" "<<total_value<<" "<<aero_<<" "<<brakes_<<" "<<power_<<" "<<handling_<<" "<<lightweight_<<" "<<weight_of_part<<endl;
 				names.push_back(name_of_part);
 				value.push_back(total_value);
 				weight.push_back(weight_of_part);
@@ -148,9 +149,13 @@ int main()
 		}
 	}
 
+	inputfile.close();
+
 	vector<vector<vector<int> > > dp(W+1, vector<vector<int> > (S+1,vector<int> (value.size()+1,-1)));
 	vector<vector<vector<vector<int> > > > items(W+1, vector<vector<vector<int> > > (S+1, vector<vector<int> > (value.size()+1,{})));
+	
 	node ans = knapsack(W, S, 0, weight, value,aero, brakes, power, handling, lightweight, dp,items);
+	
 	int final_value = 0;
 	int final_aero = 0;
 	int final_brakes = 0;
@@ -168,19 +173,38 @@ int main()
 		final_lightweight+=lightweight[ans.items[i]];
 	}
 	cout<<endl;
+	
 	cout<<"Total:"<<final_value<<endl;
 	cout<<"Aero:"<<final_aero<<endl;
 	cout<<"Brakes:"<<final_brakes<<endl;
 	cout<<"Power:"<<final_power<<endl;
 	cout<<"Handling:"<<final_handling<<endl;
 	cout<<"Lightweight:"<<final_lightweight<<endl;
-	// for(int i=0;i<dp.size();i++)
-	// {
-	// 	for(int j=0;j<dp[0].size();j++)
-	// 	{
-	// 		for(int k=0;k<dp[0][0].size();k++)cout<<dp[i][j][k]<<" ";
-	// 			cout<<endl;
-	// 	}
-	// 	cout<<endl;
-	// }
+	
+	ofstream outputfile;
+	outputfile.open(OUTPUT_FILE, ios::app);
+
+	if(!outputfile.is_open())
+	{
+		cout<<"Output file could not be successfully opened, please check for possible issues:"<<endl;
+		return -1;
+	}
+
+	outputfile<<"W:"<<W_<<" S:"<<S_<<" A:"<<A<<" B:"<<B<<" P:"<<P<<" H:"<<H<<" L:"<<L<<endl;
+	outputfile<<"Total:"<<final_value<<endl;
+	outputfile<<"Aero:"<<final_aero<<endl;
+	outputfile<<"Brakes:"<<final_brakes<<endl;
+	outputfile<<"Power:"<<final_power<<endl;
+	outputfile<<"Handling:"<<final_handling<<endl;
+	outputfile<<"Lightweight:"<<final_lightweight<<endl;
+	outputfile<<"Parts to include : ";
+	for(int i=0;i<ans.items.size();i++)
+	{
+		outputfile<<names[ans.items[i]]<<" ";
+	}
+	outputfile<<endl;
+	outputfile<<"------------------------------------------------------------------------"<<endl;
+	outputfile.close();
+
+
 }
