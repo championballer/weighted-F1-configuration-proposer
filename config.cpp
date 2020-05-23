@@ -3,10 +3,10 @@
 #include<sstream>
 
 #define A 30
-#define B 9
+#define B 12
 #define P 33
-#define H 9
-#define L 9
+#define H 18
+#define L 21
 #define W_ 34
 #define S_ 10
 
@@ -17,9 +17,24 @@ struct node{
 	vector<int> items;
 };
 
+int diff(int a = A, int b = B, int p = P, int h = H, int l = L)
+{
+	int v1 = abs(a-b);
+	int v2 = abs(a-p);
+	int v3 = abs(a-h);
+	int v4 = abs(a-l);
+	int v5 = abs(b-p);
+	int v6 = abs(b-h);
+	int v7 = abs(b-l);
+	int v8 = abs(p-h);
+	int v9 = abs(p-l);
+	int v10 = abs(h-l);
+	return v1+v2+v3+v4+v5+v6+v7+v8+v9+v10; 
+}
+
 int calculate_value(int index,vector<int>& aero, vector<int> & brakes, vector<int> & power, vector<int> & handling, vector<int> & lightweight, int a = A, int b = B, int p = P, int h = H, int l = L)
 {
-	return a*aero[index]+b*brakes[index]+p*power[index]+h*handling[index]+l*lightweight[index];
+	return a*aero[index]+b*brakes[index]+p*power[index]+h*handling[index]+l*lightweight[index]-diff();
 }
 
 node knapsack(int W, int S, int index, vector<int> & weight, vector<int> & value, vector<int> & aero, vector<int> & brakes, vector<int> & power, vector<int> & handling, vector<int> & lightweight, vector<vector<vector<int> > > & dp, vector<vector<vector<vector<int> > > > & items)
@@ -137,14 +152,28 @@ int main()
 	vector<vector<vector<vector<int> > > > items(W+1, vector<vector<vector<int> > > (S+1, vector<vector<int> > (value.size()+1,{})));
 	node ans = knapsack(W, S, 0, weight, value,aero, brakes, power, handling, lightweight, dp,items);
 	int final_value = 0;
-
+	int final_aero = 0;
+	int final_brakes = 0;
+	int final_power = 0;
+	int final_handling = 0;
+	int final_lightweight = 0;
 	for(int i=0;i<ans.items.size();i++)
 	{
 		cout<<names[ans.items[i]]<<" ";
 		final_value+=value[ans.items[i]];
+		final_aero+=aero[ans.items[i]];
+		final_brakes+=brakes[ans.items[i]];
+		final_power+=power[ans.items[i]];
+		final_handling+=handling[ans.items[i]];
+		final_lightweight+=lightweight[ans.items[i]];
 	}
 	cout<<endl;
-	cout<<final_value<<endl;
+	cout<<"Total:"<<final_value<<endl;
+	cout<<"Aero:"<<final_aero<<endl;
+	cout<<"Brakes:"<<final_brakes<<endl;
+	cout<<"Power:"<<final_power<<endl;
+	cout<<"Handling:"<<final_handling<<endl;
+	cout<<"Lightweight:"<<final_lightweight<<endl;
 	// for(int i=0;i<dp.size();i++)
 	// {
 	// 	for(int j=0;j<dp[0].size();j++)
