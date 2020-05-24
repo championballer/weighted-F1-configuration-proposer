@@ -7,3 +7,120 @@ Handling:223
 Lightweight:183
 Parts to include : BODYWORK EXHAUST FLYWHEEL ADVANCED_BALLASTS DIFFUSERS REAR_SUSPENSIONS PISTONS COCKPIT FUEL_PUMP REAR_WING 
 ------------------------------------------------------------------------
+W:34 S:10 A:30 B:12 P:33 H:12 L:21
+Total:1034
+Aero:257
+Brakes:152
+Power:256
+Handling:146
+Lightweight:220
+Parts to include : EXHAUST FLYWHEEL ADVANCED_BALLASTS DIFFUSERS REAR_SUSPENSIONS BRAKE_BALANCE PISTONS PROPELLER_SHAFT COCKPIT REAR_WING 
+------------------------------------------------------------------------
+W:34 S:10 A:30 B:12 P:33 H:12 L:24
+Total:1054
+Aero:221
+Brakes:152
+Power:243
+Handling:149
+Lightweight:286
+Parts to include : BODYWORK FLYWHEEL ADVANCED_BALLASTS DIFFUSERS BRAKE_BALANCE PISTONS ENGINE_VALVES PROPELLER_SHAFT COCKPIT REAR_WING 
+------------------------------------------------------------------------
+W:34 S:10 A:33 B:12 P:33 H:12 L:24
+Total:1054
+Aero:221
+Brakes:152
+Power:243
+Handling:149
+Lightweight:286
+Parts to include : BODYWORK FLYWHEEL ADVANCED_BALLASTS DIFFUSERS BRAKE_BALANCE PISTONS ENGINE_VALVES PROPELLER_SHAFT COCKPIT REAR_WING 
+------------------------------------------------------------------------
+W:34 S:10 A:34 B:12 P:33 H:12 L:24
+Total:1015
+Aero:323
+Brakes:61
+Power:222
+Handling:223
+Lightweight:183
+Parts to include : BODYWORK EXHAUST FLYWHEEL ADVANCED_BALLASTS DIFFUSERS REAR_SUSPENSIONS PISTONS COCKPIT FUEL_PUMP REAR_WING 
+------------------------------------------------------------------------
+W:34 S:10 A:34 B:12 P:33 H:12 L:24
+Total:1045
+Aero:272
+Brakes:106
+Power:238
+Handling:149
+Lightweight:277
+Parts to include : BODYWORK EXHAUST FLYWHEEL ADVANCED_BALLASTS DIFFUSERS PISTONS BALLASTS_BALANCE COCKPIT REAR_WING HYDRAULICS_DISTRIB 
+------------------------------------------------------------------------
+W:34 S:10 A:34 B:12 P:33 H:12 L:24
+Total:1045
+Aero:272
+Brakes:106
+Power:238
+Handling:149
+Lightweight:277
+Parts to include : BODYWORK EXHAUST FLYWHEEL ADVANCED_BALLASTS DIFFUSERS PISTONS BALLASTS_BALANCE COCKPIT REAR_WING HYDRAULICS_DISTRIB 
+------------------------------------------------------------------------
+W:34 S:10 A:30 B:12 P:33 H:12 L:24
+Total:1106
+Aero:189
+Brakes:175
+Power:225
+Handling:129
+Lightweight:385
+Parts to include : FLYWHEEL ADVANCED_BALLASTS DIFFUSERS BRAKE_BALANCE PISTONS ENGINE_VALVES COCKPIT REAR_WING CHASSIS HYDRAULICS_DISTRIB 
+------------------------------------------------------------------------
+W:34 S:10 A:33 B:12 P:33 H:12 L:24
+Total:1002
+Aero:206
+Brakes:106
+Power:319
+Handling:72
+Lightweight:296
+Parts to include : EXHAUST FLYWHEEL ADVANCED_BALLASTS DIFFUSERS PISTONS BALLASTS_BALANCE COCKPIT REAR_WING HYDRAULICS_DISTRIB MGU-H 
+------------------------------------------------------------------------
+W:34 S:10 A:34 B:12 P:33 H:12 L:24
+Total:1045
+Aero:272
+Brakes:106
+Power:238
+Handling:149
+Lightweight:277
+Parts to include : BODYWORK EXHAUST FLYWHEEL ADVANCED_BALLASTS DIFFUSERS PISTONS BALLASTS_BALANCE COCKPIT REAR_WING HYDRAULICS_DISTRIB 
+------------------------------------------------------------------------
+W:34 S:10 A:34 B:12 P:33 H:12 L:24
+Total:1045
+Aero:272
+Brakes:106
+Power:238
+Handling:149
+Lightweight:277
+Parts to include : BODYWORK EXHAUST FLYWHEEL ADVANCED_BALLASTS DIFFUSERS PISTONS BALLASTS_BALANCE COCKPIT REAR_WING HYDRAULICS_DISTRIB 
+------------------------------------------------------------------------
+W:34 S:10 A:34 B:12 P:33 H:12 L:24
+Total:1045
+Aero:272
+Brakes:106
+Power:238
+Handling:149
+Lightweight:277
+Parts to include : BODYWORK EXHAUST FLYWHEEL ADVANCED_BALLASTS DIFFUSERS PISTONS BALLASTS_BALANCE COCKPIT REAR_WING HYDRAULICS_DISTRIB 
+------------------------------------------------------------------------
+W:34 S:10 A:34 B:12 P:33 H:12 L:24
+Total:1045
+Aero:272
+Brakes:106
+Power:238
+Handling:149
+Lightweight:277
+Parts to include : BODYWORK EXHAUST FLYWHEEL ADVANCED_BALLASTS DIFFUSERS PISTONS BALLASTS_BALANCE COCKPIT REAR_WING HYDRAULICS_DISTRIB 
+------------------------------------------------------------------------
+W:34 S:10 A:34 B:12 P:33 H:12 L:24
+Total:1062
+Aero:282
+Brakes:106
+Power:245
+Handling:149
+Lightweight:277
+Parts to include : BODYWORK EXHAUST FLYWHEEL ADVANCED_BALLASTS DIFFUSERS PISTONS BALLASTS_BALANCE COCKPIT REAR_WING HYDRAULICS_DISTRIB 
+------------------------------------------------------------------------

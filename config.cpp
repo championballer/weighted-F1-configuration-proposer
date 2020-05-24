@@ -2,11 +2,11 @@
 #include<fstream>
 #include<sstream>
 
-#define A 33
+#define A 34
 #define B 12
 #define P 33
 #define H 12
-#define L 21
+#define L 24
 #define W_ 34
 #define S_ 10
 #define INPUT_FILE "./parts.txt"
@@ -165,6 +165,12 @@ int main()
 	for(int i=0;i<ans.items.size();i++)
 	{
 		cout<<names[ans.items[i]]<<" ";
+		cout<<value[ans.items[i]]<<" ";
+		cout<<aero[ans.items[i]]<<" ";
+		cout<<brakes[ans.items[i]]<<" ";
+		cout<<power[ans.items[i]]<<" ";
+		cout<<handling[ans.items[i]]<<" ";
+		cout<<lightweight[ans.items[i]]<<endl;
 		final_value+=value[ans.items[i]];
 		final_aero+=aero[ans.items[i]];
 		final_brakes+=brakes[ans.items[i]];
